@@ -3,11 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Question extends Model
 {
-    public function user()
+    protected $fillable = ['title', 'body'];
+
+    public function user() {
+        // return $this->belongTo(User::class);
+        return $this->belongsTo(User::class);
+    }    
+
+    public function setTitleAttribute($value)
     {
-    	return $this->belongTo(User::class);
+        $this->attributes['title'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
     }
+
+
 }
