@@ -6,12 +6,24 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">All Questions</div>
-
-                <div class="card-body">
+                
+       <div class="card-body">
                    @foreach($questions as $question)
                        
                         <div class="media">
-                        <div class="media-body">
+                            <div class="d-flex flex-column counters">
+                            <div class="vote">
+                                <strong class="re">{{$question->votes}}</strong> {{Str::plural('vote',$question->votes)}}
+                            </div>
+                             <div class="status {{ $question->status}}">
+                                <strong>{{$question->answers}}</strong> {{Str::plural('answer',$question->answers)}}
+                            </div>
+                             <div class="view">
+                                {{$question->views." ". Str::plural('view',$question->views)}}
+                            </div>
+                            </div>
+                            
+                        <div class="media-body"> 
                             <h5 class="mt-0"><a href="{{$question->url}}">{{$question->title}}</a></h5>
                             <p class="lead">
                                 Asked by

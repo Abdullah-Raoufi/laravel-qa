@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use Illuminate\Http\Request;
+use DB;
 
 class QuestionsController extends Controller
 {
@@ -14,8 +15,10 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions = Question::paginate(5 );
+        // DB::enableQueryLog();
+        $questions = Question::with('user')->latest()->paginate(5);
         return view('questions.index',compact('questions'));
+        // dd(DB::getQueryLog());
     }
 
     /**
